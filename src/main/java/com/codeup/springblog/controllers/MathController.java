@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MathController {
     @RequestMapping(path = "/add/{num1}/and/{num2}", method = RequestMethod.GET)
     @ResponseBody
-    public int add(@PathVariable int num1, @PathVariable int num2) {
-        return (num1 + num2);
+    public String add(@PathVariable double num1, @PathVariable double num2) {
+        return "" + (num1 + num2);
     }
 
     @RequestMapping(path = "/subtract/{num1}/and/{num2}", method = RequestMethod.GET)
     @ResponseBody
-    public int subtract(@PathVariable int num1, @PathVariable int num2) {
-        return (num1 - num2);
+    public String subtract(@PathVariable double num1, @PathVariable double num2) {
+        return "" + (num1 - num2);
     }
 
     @RequestMapping(path = "/multiply/{num1}/and/{num2}", method = RequestMethod.GET)
     @ResponseBody
-    public int multiply(@PathVariable int num1, @PathVariable int num2) {
-        return (num1 * num2);
+    public String multiply(@PathVariable double num1, @PathVariable double num2) {
+        return "" + (num1 * num2);
     }
 
     @RequestMapping(path = "/divide/{num1}/and/{num2}", method = RequestMethod.GET)
     @ResponseBody
-    public int divide(@PathVariable int num1, @PathVariable int num2) {
-        return (num1 / num2);
+    public String divide(@PathVariable double num1, @PathVariable double num2) {
+        return "" + (num1 / num2);
     }
 }
