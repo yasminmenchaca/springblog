@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show</title>
 </head>
 <body>
-
+<th:block th:if="${Post != null}">
+    <h1 th:text="${Post.getTitle()}"></h1>
+    <h3 th:text="${Post.getBody()}"></h3>
+</th:block>
 </body>
 </html>

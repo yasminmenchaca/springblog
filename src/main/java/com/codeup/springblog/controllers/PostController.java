@@ -16,21 +16,19 @@ public class PostController {
 
     // View all posts
     @GetMapping("/posts")
-    @ResponseBody
     public String viewIndexPage(Model view) {
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post("Test", "test"));
-        posts.add(new Post("Test 2", "test 2"));
-        posts.add(new Post("Test 3", "Test 3"));
+        posts.add(new Post("Post 1", "Body 1"));
+        posts.add(new Post("Post 2", "Body 2"));
+        posts.add(new Post("Post 3", "Body 3"));
         view.addAttribute("Posts", posts);
         return "/posts/index";
     }
 
     // View a particular post by id
     @GetMapping("/posts/{id}")
-    @ResponseBody
     public String getSinglePost(@PathVariable int id, Model view) {
-        Post post = new Post("ID Test", "Test");
+        Post post = new Post("Post Title", "Post Body");
         view.addAttribute("Post", post);
         return "/posts/show";
     }
