@@ -14,30 +14,31 @@ import java.util.ArrayList;
 @Controller
 public class PostController {
 
-    // View all posts
+    // model all posts
     @GetMapping("/posts")
-    public String viewIndexPage(Model view) {
+    public String viewIndexPage(Model model) {
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(new Post("Post 1", "Body 1"));
-        posts.add(new Post("Post 2", "Body 2"));
-        posts.add(new Post("Post 3", "Body 3"));
-        view.addAttribute("Posts", posts);
+        posts.add(new Post(1, "Post 1", "Body 1"));
+        posts.add(new Post(2, "Post 2", "Body 2"));
+        posts.add(new Post(3, "Post 3", "Body 3"));
+        model.addAttribute("Posts", posts);
         return "/posts/index";
     }
 
-    // View a particular post by id
+    // model a particular post by id
     @GetMapping("/posts/{id}")
-    public String getSinglePost(@PathVariable int id, Model view) {
-        Post post = new Post("Post Title", "Post Body");
-        view.addAttribute("Post", post);
+    public String getSinglePost(@PathVariable int id, Model model) {
+        Post post = new Post(id,"Post Title", "Post Body");
+        model.addAttribute("title", post.getTitle());
+        model.addAttribute("body", post.getBody());
         return "/posts/show";
     }
 
-    //  // View the "Create Post" form
+    // model the "Create Post" form
     @GetMapping("/posts/create")
     @ResponseBody
     public String getCreatePostForm() {
-        return "view the form for creating a post";
+        return "model the form for creating a post";
     }
 
     // Submit the "Create Post" form
