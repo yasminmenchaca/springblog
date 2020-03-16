@@ -2,19 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show</title>
+    <title>Viewing Post</title>
 </head>
 <body>
-<!--<th:block th:if="${Post != null}">-->
-<!--    <h1 th:text="${Post.getTitle()}"></h1>-->
-<!--    <h3 th:text="${Post.getBody()}"></h3>-->
-<!--</th:block>-->
-
-
-<!--<div th:each="post : ${posts}">-->
-<!--    <h1 th:text="${post.title}"></h1>-->
-<!--    <p th:text = "${post.body}"></p>-->
-<!--</div>-->
-
+<h1 th:text="${title}"></h1>
+<p th:text="${body}"></p>
 </body>
 </html>
