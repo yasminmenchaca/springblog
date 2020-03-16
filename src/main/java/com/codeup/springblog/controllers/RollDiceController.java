@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.messageresolver.IMessageResolver;
 
 @Controller
 public class RollDiceController {
@@ -19,6 +20,9 @@ public class RollDiceController {
         int random = (int) (Math.random() * 6 + 1);
         model.addAttribute("num", num);
         model.addAttribute("random", random);
+//        model.addAttribute("message", message);
         return "roll-dice";
     }
+
+
 }

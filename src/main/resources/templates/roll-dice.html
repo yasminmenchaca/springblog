@@ -15,12 +15,14 @@
     <input type="submit" id="num5" name="num" value="5">
     <input type="submit" id="num6" name="num" value="6">
 </form>
-<h2> Your number is: <span th:text="${num}">num</span></h2>
+<h2> Your number is: <span th:text="${num}"></span></h2>
 
-<h2> The random number is: <span th:text="${random}">diceroll</span></h2>
+<h2> The random number is: <span th:text="${random}"></span></h2>
 
-<h1 th:if="${num} == ${random}">You Won</h1>
-<h1 th:if="${num} != ${random}"> You Lost</h1>
+<!--<h1 th:if="${num} == ${random}">You Won</h1>-->
+<!--<h1 th:if="${num} != ${random}"> You Lost</h1>-->
+
+<!--<h1 th:text = "${message}"></h1>-->
 
 </body>
 </html>
