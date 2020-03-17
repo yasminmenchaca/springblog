@@ -29,7 +29,6 @@ VALUES
 (8, 'Barney', 'CA'),
 (12, 'Bowser', 'TX');
 
-
 # DROP USER IF EXISTS 'dogs_user'@'localhost';
 #
 # CREATE USER 'dogs_user'@'localhost' IDENTIFIED BY 'password';
