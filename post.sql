@@ -7,7 +7,7 @@ USE posts_db;
 CREATE TABLE posts
 (
     id    INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    title VARCHAR(100),
+    title VARCHAR(1000),
     body  TEXT               NOT NULL
 );
 

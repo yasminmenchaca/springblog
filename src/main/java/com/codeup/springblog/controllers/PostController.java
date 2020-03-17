@@ -5,17 +5,15 @@ import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.model.IModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PostController {
 
     private final PostRepository postsDao;
 
-    public PostController(PostRepository postsDao){
+    public PostController(PostRepository postsDao) {
         this.postsDao = postsDao;
     }
 
@@ -35,9 +33,8 @@ public class PostController {
         return "posts/index";
     }
 
-
 //    @GetMapping("/posts/{id}")
-//    public String getPostById(@PathVariable int id, Model model){
+//    public String getPostById(@PathVariable int id, Model model) {
 //        Post postExample = new Post(id, "Europa's First Post", "Remote Learning Today!");
 //        model.addAttribute("title", postExample.getTitle());
 //        model.addAttribute("body", postExample.getBody());
@@ -46,19 +43,22 @@ public class PostController {
 
     @GetMapping("/posts/create")
     @ResponseBody
-    public String getCreatePostForm(){
+    public String getCreatePostForm() {
         return "view the form for creating a post";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPost(){
+    public String createPost() {
         return "create a new post";
     }
 
-    @RequestMapping(path="/posts", method=RequestMethod.DELETE)
+    @GetMapping("posts/delete/{id}")
     @ResponseBody
-    public String deletePost(){
-        return "DELETE!!";
+    public String updatePost(@PathVariable long id) {
+        Post post = postsDao.getOne(id);
+        postsDao.delete(post);
+        return "Deleting post";
     }
+
 }

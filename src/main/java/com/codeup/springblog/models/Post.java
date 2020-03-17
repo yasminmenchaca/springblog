@@ -11,10 +11,10 @@ public class Post {
     @Column(nullable = false)
     private long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 1000)
     private String title;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String body;
 
     public Post() {
