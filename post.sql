@@ -43,6 +43,6 @@ values ('proin at turpis a',
 
 
 
-DROP USER IF EXISTS 'posts_user'@'localhost';
-CREATE USER 'posts_user'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL ON posts_db.* TO 'posts_user'@'localhost';
+# DROP USER IF EXISTS 'posts_user'@'localhost';
+# CREATE USER 'posts_user'@'localhost' IDENTIFIED BY 'password';
+# GRANT ALL ON posts_db.* TO 'posts_user'@'localhost';

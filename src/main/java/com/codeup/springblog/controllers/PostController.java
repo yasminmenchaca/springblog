@@ -53,6 +53,15 @@ public class PostController {
         return "create a new post";
     }
 
+    @GetMapping("/posts/update/{id}/{title}")
+    @ResponseBody
+    public String updatePost(@PathVariable long id, @PathVariable String title) {
+        Post post = postsDao.getOne(id);
+        post.setTitle(title);
+        postsDao.save(post);
+        return "Updating post";
+    }
+
     @GetMapping("posts/delete/{id}")
     @ResponseBody
     public String updatePost(@PathVariable long id) {
