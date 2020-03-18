@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
 
-    private final PostRepository postsDao;
-    private final UserRepository usersDao;
+    private PostRepository postsDao;
+    private UserRepository usersDao;
 
     public PostController(PostRepository postsDao, UserRepository usersDao) {
         this.postsDao = postsDao;
@@ -45,7 +45,7 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/delete")
-    public String delete(@PathVariable long id) {
+    public String deletePost(@PathVariable long id) {
         // delete post
         postsDao.deleteById(id);
         return "redirect:/posts";
