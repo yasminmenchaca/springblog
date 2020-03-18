@@ -3,9 +3,12 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.Repositories.PostRepository;
 import com.codeup.springblog.Repositories.UserRepository;
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 public class PostController {
@@ -34,13 +37,19 @@ public class PostController {
 
     @GetMapping("/posts/create")
     @ResponseBody
-    public String getCreatePostForm() {
+    public String createPostGet() {
+        User user = usersDao.getOne(1L); // just use the first user in the db
+        Post post = new Post();
+        post.setTitle("Quarantine Blues");
+        post.setBody("I've been at home since Saturday.");
+        post.setUser(user);
+        usersDao.save(user);
         return "view the form for creating a post";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPost() {
+    public String createPostPost() {
         return "create a new post";
     }
 
@@ -60,10 +69,10 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String updatePost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
-        Post p = postsDao.getOne(id);
-        p.setTitle(title);
-        p.setBody(body);
-        postsDao.save(p);
+        Post editedPost = postsDao.getOne(id);
+        editedPost.setTitle(title);
+        editedPost.setBody(body);
+        postsDao.save(editedPost);
         return "redirect:/posts";
     }
 

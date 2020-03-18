@@ -54,16 +54,16 @@ CREATE TABLE posts
 USE posts_db;
 
 insert into users (username, email, password)
-values ('epowling0', 'fhardingham0@hatena.ne.jp', 'G2v8q3kRB'),
-       ('cknobell1', 'sjacobsen1@github.com', 'VLJ61CE'),
-       ('afagan2', 'saires2@sphinn.com', 'PbCBlgTRUsI'),
-       ('dvasse3', 'vdmitr3@addtoany.com', 'M5FTtpdlrDCT'),
-       ('gmidlane4', 'cridgwell4@xrea.com', 'rWrn3g5xDWH'),
-       ('bgoudy5', 'doldnall5@seattletimes.com', 'K1IA9PeJ2vh'),
-       ('scorrea6', 'jgiacobillo6@mozilla.org', 'SlhuOQIBi3'),
-       ('chirschmann7', 'icarous7@bizjournals.com', 'QldRsLQALU'),
-       ('ddunk8', 'kewbanke8@sitemeter.com', 'ZDDTJlqKTW'),
-       ('mpashenkov9', 'dbusfield9@soundcloud.com', 'ZFl3u7WPLk');
+values ('yasminismean', 'email@email.com', 'password');
+#        ('cknobell1', 'sjacobsen1@github.com', 'VLJ61CE'),
+#        ('afagan2', 'saires2@sphinn.com', 'PbCBlgTRUsI'),
+#        ('dvasse3', 'vdmitr3@addtoany.com', 'M5FTtpdlrDCT'),
+#        ('gmidlane4', 'cridgwell4@xrea.com', 'rWrn3g5xDWH'),
+#        ('bgoudy5', 'doldnall5@seattletimes.com', 'K1IA9PeJ2vh'),
+#        ('scorrea6', 'jgiacobillo6@mozilla.org', 'SlhuOQIBi3'),
+#        ('chirschmann7', 'icarous7@bizjournals.com', 'QldRsLQALU'),
+#        ('ddunk8', 'kewbanke8@sitemeter.com', 'ZDDTJlqKTW'),
+#        ('mpashenkov9', 'dbusfield9@soundcloud.com', 'ZFl3u7WPLk');
 
 # DROP USER IF EXISTS 'posts_user'@'localhost';
 # CREATE USER 'posts_user'@'localhost' IDENTIFIED BY 'password';

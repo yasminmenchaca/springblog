@@ -5,10 +5,11 @@
     <title>Viewing Post</title>
 </head>
 <body>
-<nav th:replace="partials/navbar.html :: navbar"></nav>
+    <nav th:replace="partials/navbar.html :: navbar"></nav>
 
 <h1 th:text="${title}"></h1>
-<p th:text="${body}"></p>
+<h5 th:text="${body}"></h5>
+<!--<p th:text="${users.email}"></p>-->
 <script :block th:replace="/partials/scripts :: scripts"></script>
 
 </body>
