@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials/header.html :: header">
     <meta charset="UTF-8">
     <title>Viewing Post</title>
 </head>
 <body>
+<nav th:replace="partials/navbar.html :: navbar"></nav>
+
 <h1 th:text="${title}"></h1>
 <p th:text="${body}"></p>
+<script :block th:replace="/partials/scripts :: scripts"></script>
+
 </body>
 </html>
