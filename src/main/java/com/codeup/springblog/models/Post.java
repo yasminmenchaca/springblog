@@ -1,6 +1,6 @@
 package com.codeup.springblog.models;
 
-import javax.persistence.*;
+        import javax.persistence.*;
 
 @Entity
 @Table(name = "posts")
