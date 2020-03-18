@@ -1,3 +1,16 @@
+DROP DATABASE IF EXISTS posts_db;
+
+CREATE DATABASE posts_db;
+
+USE posts_db;
+
+CREATE TABLE posts
+(
+    id    INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    title VARCHAR(1000),
+    body  TEXT               NOT NULL
+);
+
 USE posts_db;
 
 insert into posts (title, body)
@@ -21,3 +34,7 @@ values ('in imperdiet et commodo vulputate justo in blandit ultrices enim',
         'Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.'),
        ('pharetra magna ac consequat metus sapien ut nunc vestibulum',
         'Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.');
+
+# DROP USER IF EXISTS 'posts_user'@'localhost';
+# CREATE USER 'posts_user'@'localhost' IDENTIFIED BY 'password';
+# GRANT ALL ON posts_db.* TO 'posts_user'@'localhost';

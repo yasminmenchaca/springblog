@@ -1,49 +1,67 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.Repositories.PostRepository;
 import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.model.IModel;
-
-import java.util.ArrayList;
 
 @Controller
 public class PostController {
 
-    @GetMapping("/posts")
-    public String getPosts(Model model){
-        ArrayList<Post> postList = new ArrayList<>();
-        postList.add(new Post(2, "Second Post", "askdfhkashdfkjahsdf"));
-        postList.add(new Post(3, "Third Post", "some more text..."));
+    private final PostRepository postsDao;
 
-        model.addAttribute("posts", postList);
+    public PostController(PostRepository postsDao) {
+        this.postsDao = postsDao;
+    }
+
+    @GetMapping("/posts")
+    public String getPosts(Model model) {
+        model.addAttribute("posts", postsDao.findAll());
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    public String getPost(@PathVariable int id, Model model){
-        Post post1 = new Post(id, "Europa's First Post", "Remote Learning Today!");
-        model.addAttribute("title", post1.getTitle());
-        model.addAttribute("body", post1.getBody());
+    public String getPost(@PathVariable long id, Model model) {
+        Post post = postsDao.getOne(id);
+        model.addAttribute("title", post.getTitle());
+        model.addAttribute("body", post.getBody());
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
     @ResponseBody
-    public String getCreatePostForm(){
+    public String getCreatePostForm() {
         return "view the form for creating a post";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPost(){
+    public String createPost() {
         return "create a new post";
     }
 
-    @RequestMapping(path="/posts", method=RequestMethod.DELETE)
-    @ResponseBody
-    public String delete(){
-        return "DELETE!!";
+    @PostMapping("/posts/{id}/delete")
+    public String delete(@PathVariable long id) {
+        // delete post
+        postsDao.deleteById(id);
+        return "redirect:/posts";
     }
+
+    @GetMapping("/posts/{id}/edit")
+    public String editForm(@PathVariable long id, Model model) {
+        Post postToEdit = postsDao.getOne(id);
+        model.addAttribute("post", postToEdit);
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String updatePost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
+        Post p = postsDao.getOne(id);
+        p.setTitle(title);
+        p.setBody(body);
+        postsDao.save(p);
+        return "redirect:/posts";
+    }
+
 }

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials/header.html :: header">
     <meta charset="UTF-8">
     <title>All Posts</title>
 </head>
 <body>
+<nav th:replace="partials/navbar.html :: navbar"></nav>
+
 <div th:each="post : ${posts}">
-    <h1 th:text = "${post.title}"></h1>
-    <p th:text = "${post.body}"></p>
+    <h1 th:text="${post.title}"></h1>
+    <p th:text="${post.body}"></p>
+    <a th:href="@{|posts/${post.id}/edit|}">Edit Post</a>
+    <form th:action="@{|posts/${post.id}/delete|}" th:method="POST">
+        <button>Delete Post</button>
+    </form>
 </div>
+<script :block th:replace="/partials/scripts :: scripts"></script>
 </body>
 </html>

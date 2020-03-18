@@ -11,7 +11,7 @@ public class Dogs {
     @Column(length = 11)
     private int id;
 
-    @Column(nullable = false, length = 3, unique = true, columnDefinition = "TINYINT(3) UNSIGNED")
+    @Column(nullable = false, length = 3, columnDefinition = "TINYINT(3) UNSIGNED")
     private int age;
 
     @Column(nullable = false, length = 200)
