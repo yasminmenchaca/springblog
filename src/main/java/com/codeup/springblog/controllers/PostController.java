@@ -46,6 +46,7 @@ public class PostController {
         post.setBody("I've been at home since Saturday.");
         post.setUser(user);
         usersDao.save(user);
+        postsDao.save(post);
         return "view the form for creating a post";
     }
 
