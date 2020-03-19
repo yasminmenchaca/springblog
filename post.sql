@@ -1,28 +1,27 @@
-DROP DATABASE IF EXISTS posts_db;
+# DROP DATABASE IF EXISTS posts_db;
 
-CREATE DATABASE posts_db;
+# CREATE DATABASE posts_db;
 
-USE posts_db;
+# USE posts_db;
 
+# create table users
+# (
+#     id       BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+#     username VARCHAR(100)           NOT NULL,
+#     email    VARCHAR(100)           NOT NULL,
+#     password VARCHAR(100)           NOT NULL
+# );
 
-create table users
-(
-    id       BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    username VARCHAR(100)           NOT NULL,
-    email    VARCHAR(100)           NOT NULL,
-    password VARCHAR(100)           NOT NULL
-);
+# USE posts_db;
 
-USE posts_db;
-
-CREATE TABLE posts
-(
-    id      BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    title   VARCHAR(1000),
-    body    TEXT                  NOT NULL,
-    user_id BIGINT,
-    FOREIGN KEY (user_id) REFERENCES users (id)
-);
+# CREATE TABLE posts
+# (
+#     id      BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+#     title   VARCHAR(1000),
+#     body    TEXT                  NOT NULL,
+#     user_id BIGINT,
+#     FOREIGN KEY (user_id) REFERENCES users (id)
+# );
 
 
 # USE posts_db;
