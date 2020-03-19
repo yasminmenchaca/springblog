@@ -38,22 +38,27 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String createPostGet() {
-        User user = usersDao.getOne(1L); // just use the first user in the db
-        Post post = new Post();
-        post.setTitle("Quarantine Blues");
-        post.setBody("I've been at home since Saturday.");
-        post.setUser(user);
-        usersDao.save(user);
-        postsDao.save(post);
-        return "view the form for creating a post";
+//    @ResponseBody
+    public String getCreatePostForm() {
+//        User user = usersDao.getOne(1L); // just use the first user in the db
+//        Post post = new Post();
+//        post.setTitle("Quarantine Blues");
+//        post.setBody("I've been at home since Saturday.");
+//        post.setUser(user);
+//        usersDao.save(user);
+//        postsDao.save(post);
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPostPost() {
-        return "create a new post";
+    public String createPost(@RequestParam String title, @RequestParam String body) {
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setBody(body);
+        usersDao.getOne(1L);
+        newPost.setUser(usersDao.getOne(1L));
+        postsDao.save(newPost);
+        return "redirect:/posts";
     }
 
     @PostMapping("/posts/{id}/delete")
