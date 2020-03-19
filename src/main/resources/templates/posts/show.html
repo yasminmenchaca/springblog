@@ -14,7 +14,7 @@
             <p class="card-text" th:text="${body}"></p>
         </div>
         <div class="card-footer text-muted">
-            <p>Contact this post author at: <span th:text="${email}"></span></p>
+            <p>Contact this post author at: <a th:href="'mailto:'+${email}"><span th:text="${email}"></span> </a>
         </div>
     </div>
 </div>
