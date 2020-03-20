@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.Repositories.PostRepository;
+import com.codeup.springblog.Repositories.UserRepository;
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
 
-    private final PostRepository postsDao;
+    private PostRepository postsDao;
+    private UserRepository usersDao;
 
-    public PostController(PostRepository postsDao) {
+    public PostController(PostRepository postsDao, UserRepository usersDao) {
         this.postsDao = postsDao;
+        this.usersDao = usersDao;
     }
 
     @GetMapping("/posts")
@@ -24,25 +28,31 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String getPost(@PathVariable long id, Model model) {
         Post post = postsDao.getOne(id);
+        User user = usersDao.getOne(id);
         model.addAttribute("title", post.getTitle());
         model.addAttribute("body", post.getBody());
+        model.addAttribute("email", user.getEmail());
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String getCreatePostForm() {
-        return "view the form for creating a post";
+    public String createPostForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createPost(@RequestParam String title, @RequestParam String body) {
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setBody(body);
+        newPost.setUser(usersDao.getOne(1L));
+        postsDao.save(newPost);
+        return "redirect:/posts";
     }
 
     @PostMapping("/posts/{id}/delete")
-    public String delete(@PathVariable long id) {
+    public String deletePost(@PathVariable long id) {
         // delete post
         postsDao.deleteById(id);
         return "redirect:/posts";
@@ -56,11 +66,12 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String updatePost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
-        Post p = postsDao.getOne(id);
-        p.setTitle(title);
-        p.setBody(body);
-        postsDao.save(p);
+    public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
+        // post object from database currently
+        Post editedPost = postsDao.getOne(id);
+        editedPost.setTitle(post.getTitle());
+        editedPost.setBody(post.getBody());
+        postsDao.save(editedPost);
         return "redirect:/posts";
     }
 

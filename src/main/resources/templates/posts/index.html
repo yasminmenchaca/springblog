@@ -7,14 +7,27 @@
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
 
-<div th:each="post : ${posts}">
-    <h1 th:text="${post.title}"></h1>
-    <p th:text="${post.body}"></p>
-    <a th:href="@{|posts/${post.id}/edit|}">Edit Post</a>
-    <form th:action="@{|posts/${post.id}/delete|}" th:method="POST">
-        <button>Delete Post</button>
-    </form>
+<!-- Page Content -->
+<div class="container">
+    <!-- Blog Post -->
+    <div class="card mb-4" th:each="post : ${posts}">
+        <img class="card-img-top" src="https://picsum.photos/750/300" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title" th:text="${post.title}"></h2>
+            <p class="card-text" th:text="${post.body}"></p>
+
+            <a th:href="@{|/posts/${post.id}/edit|}">
+                <button class="btn btn-warning">Edit Post</button>
+            </a>
+
+            <form th:action="@{|posts/${post.id}/delete|}" th:method="POST">
+                <button class="btn btn-danger">Delete Post</button>
+            </form>
+        </div>
+
+    </div>
 </div>
+
 <script :block th:replace="/partials/scripts :: scripts"></script>
 </body>
 </html>

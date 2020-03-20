@@ -6,9 +6,19 @@
 </head>
 <body>
 <nav th:replace="partials/navbar.html :: navbar"></nav>
+<div class="container">
+    <div class="card mb-4">
+        <img class="card-img-top" src="https://picsum.photos/750/300" alt="Card image cap">
+        <div class="card-body">
+            <h1 class="card-title" th:text="${title}"></h1>
+            <p class="card-text" th:text="${body}"></p>
+        </div>
+        <div class="card-footer text-muted">
+            <p>Contact this post author at: <a th:href="'mailto:'+${email}"><span th:text="${email}"></span> </a>
+        </div>
+    </div>
+</div>
 
-<h1 th:text="${title}"></h1>
-<p th:text="${body}"></p>
 <script :block th:replace="/partials/scripts :: scripts"></script>
 
 </body>
