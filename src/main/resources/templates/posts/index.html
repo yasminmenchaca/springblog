@@ -16,7 +16,9 @@
             <h2 class="card-title" th:text="${post.title}"></h2>
             <p class="card-text" th:text="${post.body}"></p>
 
-            <a th:href="@{|posts/${post.id}/edit|}">Edit Post</a>
+            <a th:href="@{|/posts/${post.id}/edit|}">
+                <button class="btn btn-warning">Edit Post</button>
+            </a>
 
             <form th:action="@{|posts/${post.id}/delete|}" th:method="POST">
                 <button class="btn btn-danger">Delete Post</button>
