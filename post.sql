@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS posts_db;
+# DROP DATABASE IF EXISTS posts_db;
 
 # CREATE DATABASE posts_db;
 
@@ -33,9 +33,9 @@ DROP DATABASE IF EXISTS posts_db;
 USE posts_db;
 
 insert into users (username, email, password)
-values ('yasminismean', 'yasmin@email.com', 'password');
+values ('yasminismean', '202a14dd9d-def0f3@inbox.mailtrap.io', 'password');
 
-USE posts_db;
-DROP USER IF EXISTS 'posts_user'@'localhost';
-CREATE USER 'posts_user'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL ON posts_db.* TO 'posts_user'@'localhost';
+# USE posts_db;
+# DROP USER IF EXISTS 'posts_user'@'localhost';
+# CREATE USER 'posts_user'@'localhost' IDENTIFIED BY 'password';
+# GRANT ALL ON posts_db.* TO 'posts_user'@'localhost';
