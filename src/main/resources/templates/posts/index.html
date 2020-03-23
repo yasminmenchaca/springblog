@@ -13,16 +13,19 @@
     <div class="card mb-4" th:each="post : ${posts}">
         <img class="card-img-top" src="https://picsum.photos/750/300" alt="Card image cap">
         <div class="card-body">
-            <h2 class="card-title" th:text="${post.title}"></h2>
+            <a th:href="@{|/posts/${post.id}|}"><h2 class="card-title" th:text="${post.title}"></h2></a>
             <p class="card-text" th:text="${post.body}"></p>
 
             <a th:href="@{|/posts/${post.id}/edit|}">
-                <button class="btn btn-warning">Edit Post</button>
+                <button>Edit Post</button>
             </a>
-
-            <form th:action="@{|posts/${post.id}/delete|}" th:method="POST">
-                <button class="btn btn-danger">Delete Post</button>
+            <form th:action="@{|/posts/${post.id}/delete|}" th:method="POST" style="display:inline">
+                <button>Delete Post</button>
             </form>
+        </div>
+        <div class="card-footer text-muted">
+            <p>Contact this post author at: <a th:href="'mailto:'+${post.user.email}"><span
+                    th:text="${post.user.email}"></span> </a>
         </div>
 
     </div>

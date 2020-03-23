@@ -55,8 +55,9 @@ public class PostController {
         newPost.setBody(body);
         newPost.setUser(usersDao.getOne(1L));
         postsDao.save(newPost);
-        String emailSubject = "This is the email subject";
-        String emailBody = "Email Body Test";
+        String emailSubject = "Your new post: " + title;
+        String emailBody = "Recently posted: " + body;
+
         emailService.prepareAndSend(newPost, emailSubject, emailBody);
         return "redirect:/posts";
     }
@@ -81,6 +82,7 @@ public class PostController {
     public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
         // post object from database currently
         Post editedPost = postsDao.getOne(id);
+
         editedPost.setTitle(post.getTitle());
         editedPost.setBody(post.getBody());
         postsDao.save(editedPost);

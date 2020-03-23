@@ -1,4 +1,4 @@
-# DROP DATABASE IF EXISTS posts_db;
+DROP DATABASE IF EXISTS posts_db;
 
 # CREATE DATABASE posts_db;
 
@@ -30,10 +30,10 @@
 # values ('in imperdiet et commodo vulputate justo in blandit ultrices enim',
 #         'Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit.');
 
-USE posts_db;
-
-insert into users (username, email, password)
-values ('yasminismean', '202a14dd9d-def0f3@inbox.mailtrap.io', 'password');
+# USE posts_db;
+#
+# insert into users (username, email, password)
+# values ('yasminismean', '202a14dd9d-def0f3@inbox.mailtrap.io', 'password');
 
 # USE posts_db;
 # DROP USER IF EXISTS 'posts_user'@'localhost';
