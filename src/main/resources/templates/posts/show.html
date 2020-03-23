@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/header.html :: header">
     <meta charset="UTF-8">
     <title>Viewing Post</title>
@@ -17,6 +18,15 @@
             <p>Contact this post author at: <a th:href="'mailto:'+${email}"><span th:text="${email}"></span> </a>
         </div>
     </div>
+</div>
+
+
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+
+    User ID: <span th:text="${#authentication.principal.id}"></span>
+    Username: <span th:text="${#authentication.principal.username}"></span>
+    Email: <span th:text="${#authentication.principal.email}"></span>
 </div>
 
 <script :block th:replace="/partials/scripts :: scripts"></script>
