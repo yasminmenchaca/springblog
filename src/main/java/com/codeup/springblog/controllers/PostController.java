@@ -7,6 +7,7 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class PostController {
     public String getPost(@PathVariable long id, Model model) {
         Post post = postsDao.getOne(id);
         User user = usersDao.getOne(id);
+
         model.addAttribute("title", post.getTitle());
         model.addAttribute("body", post.getBody());
         model.addAttribute("email", user.getEmail());
@@ -43,9 +45,13 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String createPostForm(Model model) {
-        model.addAttribute("post", new Post());
-        return "posts/create";
+    public String createPostForm() {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (loggedInUser != null)
+            return "posts/create";
+        else
+            return "redirect:/login";
     }
 
     @PostMapping("/posts/create")
@@ -53,11 +59,12 @@ public class PostController {
         Post newPost = new Post();
         newPost.setTitle(title);
         newPost.setBody(body);
-        newPost.setUser(usersDao.getOne(1L));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        newPost.setUser(loggedInUser);
         postsDao.save(newPost);
-        String emailSubject = "Your new post: " + title;
-        String emailBody = "Recently posted: " + body;
 
+        String emailSubject = "New Blog Post";
+        String emailBody = "Your post '" + title + "' is now live.";
         emailService.prepareAndSend(newPost, emailSubject, emailBody);
         return "redirect:/posts";
     }
