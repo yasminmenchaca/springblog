@@ -9,4 +9,9 @@ public class AuthenticationController {
     public String showLoginForm() {
         return "users/login";
     }
+
+    @GetMapping("/logout")
+    public String showLogout() {
+        return "users/logout";
+    }
 }
