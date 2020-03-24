@@ -60,7 +60,7 @@ public class PostsIntegrationTests {
             testUser = userDao.save(newUser);
         }
 
-        // Throws a Post request to /login and expect a redirection to the Ads index page after being logged in
+        // Throws a Post request to /login and expect a redirection to the posts index page after being logged in
         httpSession = this.mvc.perform(post("/login").with(csrf())
                 .param("username", "testUser")
                 .param("password", "pass"))
@@ -85,7 +85,7 @@ public class PostsIntegrationTests {
 
     @Test
     public void testCreatePost() throws Exception {
-        // Makes a Post request to /ads/create and expect a redirection to the Ad
+        // Makes a Post request to /posts/create and expect a redirection to the Ad
         this.mvc.perform(
                 post("/posts/create").with(csrf())
                         .session((MockHttpSession) httpSession)
@@ -100,7 +100,7 @@ public class PostsIntegrationTests {
 
         Post existingPost = postsDao.findAll().get(0);
 
-        // Makes a Get request to /ads/{id} and expect a redirection to the Ad show page
+        // Makes a Get request to /posts/{id} and expect a redirection to the post show page
         this.mvc.perform(get("/posts/" + existingPost.getId()))
                 .andExpect(status().isOk())
                 // Test the dynamic content of the page
@@ -111,7 +111,7 @@ public class PostsIntegrationTests {
     public void testPostsIndex() throws Exception {
         Post existingPost = postsDao.findAll().get(0);
 
-        // Makes a Get request to /ads and verifies that we get some of the static text of the ads/index.html template and at least the title from the first Ad is present in the template.
+        // Makes a Get request to /posts and verifies that we get some of the static text of the posts/index.html template and at least the title from the first post is present in the template.
         this.mvc.perform(get("/posts"))
                 .andExpect(status().isOk())
                 // Test the static content of the page
@@ -122,10 +122,10 @@ public class PostsIntegrationTests {
 
     @Test
     public void testEditPost() throws Exception {
-        // Gets the first Ad for tests purposes
+        // Gets the first post for tests purposes
         Post existingPost = postsDao.findAll().get(0);
 
-        // Makes a Post request to /ads/{id}/edit and expect a redirection to the Ad show page
+        // Makes a Post request to /posts/{id}/edit and expect a redirection to the post show page
         this.mvc.perform(
                 post("/posts/" + existingPost.getId() + "/edit").with(csrf())
                         .session((MockHttpSession) httpSession)
@@ -133,7 +133,7 @@ public class PostsIntegrationTests {
                         .param("body", "edited description"))
                 .andExpect(status().is3xxRedirection());
 
-        // Makes a GET request to /ads/{id} and expect a redirection to the Ad show page
+        // Makes a GET request to /posts/{id} and expect a redirection to the post show page
         this.mvc.perform(get("/posts/" + existingPost.getId()))
                 .andExpect(status().isOk())
                 // Test the dynamic content of the page
@@ -142,19 +142,19 @@ public class PostsIntegrationTests {
     }
 
     @Test
-    public void testDeleteAd() throws Exception {
-        // Creates a test Ad to be deleted
+    public void testDeletePost() throws Exception {
+        // Creates a test post to be deleted
         this.mvc.perform(
                 post("/posts/create").with(csrf())
                         .session((MockHttpSession) httpSession)
-                        .param("title", "ad to be deleted")
+                        .param("title", "post to be deleted")
                         .param("body", "won't last long"))
                 .andExpect(status().is3xxRedirection());
 
-        // Get the recent Ad that matches the title
-        Post existingPost = postsDao.findByTitle("ad to be deleted");
+        // Get the recent post that matches the title
+        Post existingPost = postsDao.findByTitle("post to be deleted");
 
-        // Makes a Post request to /ads/{id}/delete and expect a redirection to the Ads index
+        // Makes a Post request to /posts/{id}/delete and expect a redirection to the posts index
         this.mvc.perform(
                 post("/posts/" + existingPost.getId() + "/delete").with(csrf())
                         .session((MockHttpSession) httpSession)
