@@ -7,7 +7,6 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,22 +35,18 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String getPost(@PathVariable long id, Model model) {
         Post post = postsDao.getOne(id);
-        User user = usersDao.getOne(id);
+//        User user = usersDao.getOne(id);
 
         model.addAttribute("title", post.getTitle());
         model.addAttribute("body", post.getBody());
-        model.addAttribute("email", user.getEmail());
+//        model.addAttribute("email", user.getEmail());
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    public String createPostForm() {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (loggedInUser != null)
-            return "posts/create";
-        else
-            return "redirect:/login";
+    public String createPostForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
@@ -80,19 +75,25 @@ public class PostController {
 
     @GetMapping("/posts/{id}/edit")
     public String editForm(@PathVariable long id, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post postToEdit = postsDao.getOne(id);
-        model.addAttribute("post", postToEdit);
+
+        if (loggedInUser.getId() == postsDao.getOne(id).getUser().getId())
+            model.addAttribute("post", postToEdit);
         return "posts/edit";
     }
 
     @PostMapping("/posts/{id}/edit")
     public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
         // post object from database currently
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post editedPost = postsDao.getOne(id);
 
-        editedPost.setTitle(post.getTitle());
-        editedPost.setBody(post.getBody());
-        postsDao.save(editedPost);
+        if (loggedInUser.getId() == postsDao.getOne(id).getUser().getId()) {
+            editedPost.setTitle(post.getTitle());
+            editedPost.setBody(post.getBody());
+            postsDao.save(editedPost);
+        }
         return "redirect:/posts";
     }
 
