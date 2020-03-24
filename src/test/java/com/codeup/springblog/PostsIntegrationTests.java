@@ -84,7 +84,7 @@ public class PostsIntegrationTests {
 
     @Test
     public void testCreatePost() throws Exception {
-        // Makes a Post request to /posts/create and expect a redirection to the Ad
+        // Makes a Post request to /posts/create and expect a redirection to the post
         this.mvc.perform(
                 post("/posts/create").with(csrf())
                         .session((MockHttpSession) httpSession)
@@ -95,7 +95,7 @@ public class PostsIntegrationTests {
     }
 
     @Test
-    public void testShowAd() throws Exception {
+    public void testShowPost() throws Exception {
 
         Post existingPost = postsDao.findAll().get(0);
 
