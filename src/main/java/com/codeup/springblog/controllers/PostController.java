@@ -35,10 +35,11 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String getPost(@PathVariable long id, Model model) {
         Post post = postsDao.getOne(id);
-        User user = usersDao.getOne(id);
+//        User user = usersDao.getOne(id);
+
         model.addAttribute("title", post.getTitle());
         model.addAttribute("body", post.getBody());
-        model.addAttribute("email", user.getEmail());
+//        model.addAttribute("email", user.getEmail());
         return "posts/show";
     }
 
@@ -53,11 +54,12 @@ public class PostController {
         Post newPost = new Post();
         newPost.setTitle(title);
         newPost.setBody(body);
-        newPost.setUser(usersDao.getOne(1L));
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        newPost.setUser(loggedInUser);
         postsDao.save(newPost);
-        String emailSubject = "Your new post: " + title;
-        String emailBody = "Recently posted: " + body;
 
+        String emailSubject = "New Blog Post";
+        String emailBody = "Your post '" + title + "' is now live.";
         emailService.prepareAndSend(newPost, emailSubject, emailBody);
         return "redirect:/posts";
     }
@@ -73,19 +75,25 @@ public class PostController {
 
     @GetMapping("/posts/{id}/edit")
     public String editForm(@PathVariable long id, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post postToEdit = postsDao.getOne(id);
-        model.addAttribute("post", postToEdit);
+
+        if (loggedInUser.getId() == postsDao.getOne(id).getUser().getId())
+            model.addAttribute("post", postToEdit);
         return "posts/edit";
     }
 
     @PostMapping("/posts/{id}/edit")
     public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
         // post object from database currently
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post editedPost = postsDao.getOne(id);
 
-        editedPost.setTitle(post.getTitle());
-        editedPost.setBody(post.getBody());
-        postsDao.save(editedPost);
+        if (loggedInUser.getId() == postsDao.getOne(id).getUser().getId()) {
+            editedPost.setTitle(post.getTitle());
+            editedPost.setBody(post.getBody());
+            postsDao.save(editedPost);
+        }
         return "redirect:/posts";
     }
 
