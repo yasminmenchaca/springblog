@@ -22,7 +22,6 @@ public class HomeController {
         return "home";
     }
 
-
 //    @GetMapping("/fruit")
 //    public String fruit(Model model) {
 //        List<String> fruitBasket = new ArrayList<>();

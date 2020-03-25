@@ -78,9 +78,10 @@ public class PostController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post postToEdit = postsDao.getOne(id);
 
-        if (loggedInUser.getId() == postsDao.getOne(id).getUser().getId())
+        if (loggedInUser.getId() == postsDao.getOne(id).getUser().getId()) {
             model.addAttribute("post", postToEdit);
-        return "posts/edit";
+        }
+        return "redirect:/posts";
     }
 
     @PostMapping("/posts/{id}/edit")
