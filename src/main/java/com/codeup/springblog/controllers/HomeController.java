@@ -11,10 +11,10 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-//    @GetMapping("/home")
-//    public String welcome() {
-//        return "home";
-//    }
+    @GetMapping("/home")
+    public String welcome() {
+        return "home";
+    }
 
 //    @GetMapping("/hello/{name}")
 //    public String sayHello(@PathVariable String name, Model model) {
@@ -22,14 +22,14 @@ public class HomeController {
 //        return "hello";
 //    }
 
-    @GetMapping("/fruit")
-    public String fruit(Model model) {
-        List<String> fruitBasket = new ArrayList<>();
-        fruitBasket.add("apple");
-        fruitBasket.add("pineapple");
-        fruitBasket.add("mango");
-        fruitBasket.add("pear");
-        model.addAttribute("fruitBasket", fruitBasket);
-        return "fruit";
-    }
+//    @GetMapping("/fruit")
+//    public String fruit(Model model) {
+//        List<String> fruitBasket = new ArrayList<>();
+//        fruitBasket.add("apple");
+//        fruitBasket.add("pineapple");
+//        fruitBasket.add("mango");
+//        fruitBasket.add("pear");
+//        model.addAttribute("fruitBasket", fruitBasket);
+//        return "fruit";
+//    }
 }
